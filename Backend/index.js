@@ -2,9 +2,6 @@
 const express = require('express');
 const app = express();
 
-const session = require('cookie-session');
-const sessionMiddleware = session({secret:"ssshhhh", signed: true, resave: true, saveUninitialized: true});
-
 const http = require('http');
 const server = http.createServer(app);
 
@@ -14,24 +11,33 @@ const io = socketio(server, {cors:{origin:'*'}});
 // Port number
 const PORT = 3000 || process.env.PORT;
 
-// Socket Session manager
-io.use(function(socket, next){
-  sessionMiddleware(socket.request, socket.request.res || {}, next);
-});
-
-app.use(sessionMiddleware);
+var sessions = new Map();
 
 // Run when client connects
 io.on('connection', function(socket) {
-  console.log("New connection ...",socket.id);
-  //console.log(socket.request.session);
+  io.to(socket.id).emit('welcome', {});
+
+  // assigns the new socket id to the user token
+  socket.on('welcome', function (data) {
+    sessions[data.token] = socket.id;
+  });
+
+  socket.on('handshake', function (data) {
+     data.token = socket.id;
+     sessions[socket.id] = socket.id;
+     io.to(socket.id).emit('handshake', data);
+  });
 
   socket.on('userName', function (data) {
-      console.log(data);
-   });
+    //console.log(data);
+  });
+
+  socket.on('test', function (data) {
+    console.log(data);
+  });
 
   socket.on('disconnect', function () {
-      console.log('A user disconnected');
+      //console.log('A user disconnected');
    });
 });
 

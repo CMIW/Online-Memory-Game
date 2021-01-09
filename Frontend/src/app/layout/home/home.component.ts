@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
   }
 
   createGroup(){
-    console.log(this.name);
     this.socketService.emit("userName",this.name);
     this.router.navigate(['/room']);
   }
