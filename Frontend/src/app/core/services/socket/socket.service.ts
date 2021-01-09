@@ -16,9 +16,7 @@ export class SocketService {
     this.listen('welcome').subscribe(res => {
       this.emit('welcome',{});
     });
-    if(this.dataService.getToken() == null){
-      this.handshake();
-    }
+    this.handshake();
   }
 
   // observable tha listen to socket channels and returns the data sent by the server
@@ -37,10 +35,8 @@ export class SocketService {
 
   // requests a token from the server and stores it
   handshake(){
-    this.emit('handshake',{});
     this.listen('handshake').subscribe(res => {
       this.dataService.setToken(res.token);
-      console.log(res);
     });
   }
 
