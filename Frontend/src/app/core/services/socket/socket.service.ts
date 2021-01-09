@@ -37,7 +37,6 @@ export class SocketService {
   handshake(){
     this.listen('handshake').subscribe(res => {
       this.dataService.setToken(res.token);
-      console.log(res);
     });
   }
 
