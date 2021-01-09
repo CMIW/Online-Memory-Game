@@ -5,16 +5,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './modules/material/material.module';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   exports:[
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ]
 })
 export class CoreModule { }

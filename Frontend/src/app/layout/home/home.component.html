@@ -1,16 +1,27 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-8 h-25">
-      <mat-card class="mat-elevation-z5 h-100">
-        <div class="row h-100 justify-content-center align-items-center text-center">
-          <div class="col">
-            <button mat-raised-button color type="button" name="button" (click)='joinGroup()'>Join Group</button>
+
+      <mat-card class="container mat-elevation-z5 h-100">
+        <form name="userForm" id="userForm" #userForm="ngForm">
+          <div class="row h-100 justify-content-center align-items-center text-center">
+            <mat-form-field class="col">
+              <mat-label>Name</mat-label>
+              <input matInput ngModel required [(ngModel)]="name" name="userName" id="userName" #userName="ngModel">
+              <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">A name or nickname is required</small>
+            </mat-form-field>
           </div>
-          <div class="col">
-            <button mat-raised-button color type="button" name="button">Create Group</button>
+          <div class="row h-100 justify-content-center align-items-center text-center">
+            <div class="col">
+              <button mat-raised-button color type="button" name="joinGroup" [disabled]="userForm.form.invalid" (click)='joinGroup()'>Join Group</button>
+            </div>
+            <div class="col">
+              <button mat-raised-button color type="button" name="createGroup" [disabled]="userForm.form.invalid" (click)='createGroup()'>Create Group</button>
+            </div>
           </div>
-        </div>
+        </form>
       </mat-card>
+
     </div>
   </div>
 </div>

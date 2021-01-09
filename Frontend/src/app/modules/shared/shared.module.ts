@@ -5,11 +5,13 @@ import { CoreModule } from '../../core/core.module';
 
 import { HomeComponent } from '../../layout/home/home.component';
 import { JoinComponent } from '../../layout/join/join.component';
+import { RoomComponent } from '../../layout/room/room.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
-    JoinComponent
+    JoinComponent,
+    RoomComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { JoinComponent } from '../../layout/join/join.component';
   ],
   exports:[
     HomeComponent,
-    JoinComponent
+    JoinComponent,
+    RoomComponent
   ]
 })
 export class SharedModule { }

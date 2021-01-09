@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 
-import { SocketService } from './core/services/socket/socket.service';
+import { DataService } from './core/services/data/data.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { SocketService } from './core/services/socket/socket.service';
     CoreModule,
     SharedModule
   ],
-  providers: [SocketService],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
