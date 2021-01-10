@@ -1,0 +1,16 @@
+<div class="container h-100">
+  <form name="joinForm" id="joinForm" #joinForm="ngForm">
+    <div class="row h-100 justify-content-center align-items-center text-center">
+      <mat-form-field class="col">
+        <mat-label>Room ID</mat-label>
+        <input matInput ngModel required [(ngModel)]="room" name="roomId" id="roomId" #roomId="ngModel">
+        <small class="text-danger" [class.d-none]="roomId.valid || roomId.untouched">A room Id is required</small>
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions class="row h-100 justify-content-center align-items-center text-center">
+      <div class="col">
+        <button mat-raised-button [mat-dialog-close]="room" color type="button" name="joinGroup" [disabled]="joinForm.form.invalid">Join Room</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>

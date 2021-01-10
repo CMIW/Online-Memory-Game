@@ -7,12 +7,16 @@ import { HomeComponent } from '../../layout/home/home.component';
 import { JoinComponent } from '../../layout/join/join.component';
 import { RoomComponent } from '../../layout/room/room.component';
 
+import { JoinDialogComponent } from '../../layout/components/join-dialog/join-dialog.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
     JoinComponent,
-    RoomComponent
+    RoomComponent,
+    JoinDialogComponent
   ],
+  entryComponents: [JoinDialogComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,7 +25,8 @@ import { RoomComponent } from '../../layout/room/room.component';
   exports:[
     HomeComponent,
     JoinComponent,
-    RoomComponent
+    RoomComponent,
+    JoinDialogComponent
   ]
 })
 export class SharedModule { }

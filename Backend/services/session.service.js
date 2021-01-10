@@ -3,6 +3,7 @@ class SessionService{
 
   constructor(){}
 
+  // adds a new session to the sessions map
   addNewSession(session){
     this.sessions[session.socketId] = session;
   }
@@ -19,15 +20,22 @@ class SessionService{
     }
   }
 
-  getSession(userToken){
-    return this.sessions[userToken];
+  // returns the socket id for the given user token
+  getSessionSocket(userToken){
+    return this.sessions[userToken]['socketId'];
   }
 
+  // adds a user name to the user session
   nameUserSession(userToken,userName){
     if(this.sessions[userToken]){
       this.sessions[userToken]['userName'] = userName;
     }
   }
+
+  getSession(userToken){
+    return this.sessions[userToken];
+  }
+
 }
 
 module.exports = SessionService;
