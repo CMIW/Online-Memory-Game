@@ -8,11 +8,15 @@ const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server, {cors:{origin:'*'}});
 
+// Port number
+const PORT = 3000 || process.env.PORT;
+
+// Services
 const SessionService = require('./services/session.service');
 const sessionService = new SessionService();
 
-// Port number
-const PORT = 3000 || process.env.PORT;
+const RoomService = require('./services/room.service');
+const roomService = new RoomService();
 
 // Run when client connects
 io.on('connection', function(socket) {
@@ -30,18 +34,38 @@ io.on('connection', function(socket) {
     }
   });
 
+  // adds a userName to user session
   socket.on('userName', function (payload) {
     sessionService.nameUserSession(payload.token, payload.data);
-    //console.log(data);
+  });
+
+  socket.on('createRoom', function(payload){
+    let roomId = roomService.createRoom(payload.token);
+    socket.join(roomId);
+    payload.data = roomId;
+    io.to(socket.id).emit('roomId', payload);
+  });
+
+  socket.on('joinRoom', function(payload) {
+    let roomId = payload.data;
+    let roomAccess = roomService.exists(parseInt(roomId));
+    payload.data = roomAccess;
+    io.to(socket.id).emit('roomAccess', payload);
+    if(roomAccess){
+      roomService.joinRoom(roomId,payload.token);
+      socket.join(roomId);
+      payload.data = roomId;
+      io.to(socket.id).emit('roomId', payload);
+    }
+  });
+
+  socket.on('disconnect', function () {
   });
 
   socket.on('test', function (payload) {
     console.log(sessionService.getSession(payload.token));
   });
 
-  socket.on('disconnect', function () {
-      //console.log('A user disconnected');
-   });
 });
 
 // Server listener
