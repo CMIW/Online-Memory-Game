@@ -6,6 +6,9 @@ import { DataService } from '../../core/services/data/data.service';
 import { MatDialog } from '@angular/material/dialog';
 
 import { JoinDialogComponent } from '../components/join-dialog/join-dialog.component';
+import { CreateDialogComponent } from '../components/create-dialog/create-dialog.component';
+import { MessageDialogComponent } from '../components/message-dialog/message-dialog.component';
+
 
 @Component({
   selector: 'app-home',
@@ -15,11 +18,20 @@ import { JoinDialogComponent } from '../components/join-dialog/join-dialog.compo
 export class HomeComponent implements OnInit {
   public name: string;
   public room: number;
+  public size: number;
 
   constructor(public dialog:MatDialog, private router: Router, private socketService: SocketService,  private dataService:DataService) { }
 
   ngOnInit(): void {
     this.name = this.dataService.getUserName();
+    this.socketService.listen('roomAccess').subscribe(res => {
+      if(res.data.access){
+        this.router.navigate(['/room']);
+      }
+      else{
+        this.dialog.open(MessageDialogComponent,{data:{message:res.data.message}});
+      }
+    });
   }
 
   joinGroup(){
@@ -28,21 +40,25 @@ export class HomeComponent implements OnInit {
       if(result){
         this.room = result;
         this.socketService.emit("joinRoom",this.room);
-      }
-    });
-
-    this.socketService.listen('roomAccess').subscribe(res => {
-      if(res.data){
-        this.router.navigate(['/room']);
+        this.setUserName();
       }
     });
   }
 
   createGroup(){
+    let dialogRef = this.dialog.open(CreateDialogComponent);
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this.size = result;
+        this.socketService.emit("createRoom",this.size);
+        this.setUserName();
+      }
+    });
+  }
+
+  setUserName(){
     this.dataService.setUserName(this.name);
     this.socketService.emit("userName",this.name);
-    this.socketService.emit("createRoom",{});
-    this.router.navigate(['/room']);
   }
 
 }

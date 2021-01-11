@@ -1,0 +1,16 @@
+<div class="container h-100">
+  <form name="createForm" id="createForm" #createForm="ngForm">
+    <div class="row h-100 justify-content-center align-items-center text-center">
+      <mat-form-field class="col">
+        <mat-label>Room Size</mat-label>
+        <input matInput ngModel required [(ngModel)]="size" name="roomSize" id="roomSize" #roomSize="ngModel" type="number" min="2">
+        <small class="text-danger" [class.d-none]="roomSize.valid || roomSize.untouched">A size for the room is required</small>
+      </mat-form-field>
+    </div>
+    <mat-dialog-actions class="row h-100 justify-content-center align-items-center text-center">
+      <div class="col">
+        <button mat-raised-button [mat-dialog-close]="size" color type="button" name="createRoom" [disabled]="createForm.form.invalid">Create Room</button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+</div>

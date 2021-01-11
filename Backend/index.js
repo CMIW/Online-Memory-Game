@@ -40,18 +40,20 @@ io.on('connection', function(socket) {
   });
 
   socket.on('createRoom', function(payload){
-    let roomId = roomService.createRoom(payload.token);
+    let roomId = roomService.createRoom(payload.token, parseInt(payload.data));
     socket.join(roomId);
     payload.data = roomId;
     io.to(socket.id).emit('roomId', payload);
+    payload.data = roomService.validEntry(roomId);
+    io.to(socket.id).emit('roomAccess', payload);
   });
 
   socket.on('joinRoom', function(payload) {
-    let roomId = payload.data;
-    let roomAccess = roomService.exists(parseInt(roomId));
+    let roomId = parseInt(payload.data);
+    let roomAccess = roomService.validEntry(roomId);
     payload.data = roomAccess;
     io.to(socket.id).emit('roomAccess', payload);
-    if(roomAccess){
+    if(roomAccess.access){
       roomService.joinRoom(roomId,payload.token);
       socket.join(roomId);
       payload.data = roomId;
