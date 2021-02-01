@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // sends que user name to the server, que server attaches the name to the user token
   setUserName(){
     this.dataService.setUserName(this.name);
     this.socketService.emit("userName",this.name);
