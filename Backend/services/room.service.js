@@ -4,6 +4,7 @@ class RoomService{
 
   constructor(){}
 
+  // creates generates a new unique ID
   createRoomId(){
     let id;
     do{
@@ -19,18 +20,22 @@ class RoomService{
     return newId;
   }
 
+  // adds the user to the room
   joinRoom(room,userToken){
     this.rooms[room]['integrants'].push(userToken);
   }
 
+  // validates that the room exists
   exists(roomId){
     return this.ids.includes(roomId);
   }
 
+  // validates for room in the room
   available(roomId){
     return !(this.rooms[roomId]['integrants'].length == this.rooms[roomId]['size']);
   }
 
+  // validates that if the room can be joined
   validEntry(roomId){
     if (!this.exists(roomId)) {
       return {access: false, message:"The room not does not exist.", code: 2};

@@ -1,5 +1,7 @@
-<p>room works!</p>
-<button type="button" name="button" (click)="test()">test</button>
 <div class="container h-100">
   <h1>Room: {{this.roomId}}</h1>
+  <button type="button" name="button" (click)="test()">test</button>
+  <div class="" *ngIf="board != null">
+    <img src="{{board.cards[0].image}}" alt="">
+  </div>
 </div>

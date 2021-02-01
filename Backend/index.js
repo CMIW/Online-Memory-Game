@@ -39,6 +39,7 @@ io.on('connection', function(socket) {
     sessionService.nameUserSession(payload.token, payload.data);
   });
 
+  // creates a room, sends the room number to the user and adds the user to the room
   socket.on('createRoom', function(payload){
     let roomId = roomService.createRoom(payload.token, parseInt(payload.data));
     socket.join(roomId);
@@ -48,6 +49,7 @@ io.on('connection', function(socket) {
     io.to(socket.id).emit('roomAccess', payload);
   });
 
+  // validates that the room can bee joined and adds the user to the room
   socket.on('joinRoom', function(payload) {
     let roomId = parseInt(payload.data);
     let roomAccess = roomService.validEntry(roomId);
@@ -59,6 +61,15 @@ io.on('connection', function(socket) {
       payload.data = roomId;
       io.to(socket.id).emit('roomId', payload);
     }
+  });
+
+  // sends the playing board when a user request the board
+  socket.on('board', function(payload) {
+    console.log(payload);
+    const Board = require('./models/board');
+    var gameBoard = new Board(payload.data);
+    payload.data = gameBoard;
+    io.to(socket.id).emit('board', payload);
   });
 
   socket.on('disconnect', function () {

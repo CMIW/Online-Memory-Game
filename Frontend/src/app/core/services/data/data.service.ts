@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IBoard } from '../../../models/IBoard.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   public roomId = new BehaviorSubject("");
+  public board: BehaviorSubject<IBoard> = new BehaviorSubject(null);
   //public userName = new BehaviorSubject("");
 
   constructor() { }
@@ -35,6 +37,10 @@ export class DataService {
   getUserName(){
     return sessionStorage.getItem('userName');
     //this.userName.next(sessionStorage.getItem('userName'));
+  }
+
+  setBoard(board){
+    this.board.next(board);
   }
 
 }

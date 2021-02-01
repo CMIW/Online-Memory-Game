@@ -16,6 +16,7 @@ export class SocketService {
     this.welcome();
     this.handshake();
     this.room();
+    this.board();
   }
 
   // observable tha listen to socket channels and returns the data sent by the server
@@ -48,6 +49,12 @@ export class SocketService {
   room(){
     this.listen('roomId').subscribe(res => {
       this.dataService.setRoomId(res.data);
+    });
+  }
+
+  board(){
+    this.listen('board').subscribe(res => {
+      this.dataService.setBoard(res.data);
     });
   }
 
