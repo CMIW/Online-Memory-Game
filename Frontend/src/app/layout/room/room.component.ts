@@ -20,7 +20,7 @@ export class RoomComponent implements OnInit {
     this.dataService.roomId.subscribe(roomId =>{
       this.roomId = roomId;
     });
-    this.socketService.emit("board",6);
+    this.socketService.emit("board",16);
     this.dataService.board.subscribe(board =>{
       if (board) {
         this.board = board;

@@ -1,9 +1,10 @@
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-8 h-25">
-
+      <!-- Welcome Card -->
       <mat-card class="container mat-elevation-z5 h-100">
         <form name="userForm" id="userForm" #userForm="ngForm">
+          <!-- Name input -->
           <div class="row h-100 justify-content-center align-items-center text-center">
             <mat-form-field class="col">
               <mat-label>Name</mat-label>
@@ -12,9 +13,11 @@
             </mat-form-field>
           </div>
           <div class="row h-100 justify-content-center align-items-center text-center">
+            <!-- Join group button -->
             <div class="col">
               <button mat-raised-button color type="button" name="joinGroup" [disabled]="userForm.form.invalid" (click)='joinGroup()'>Join Group</button>
             </div>
+            <!-- Create group button -->
             <div class="col">
               <button mat-raised-button color type="button" name="createGroup" [disabled]="userForm.form.invalid" (click)='createGroup()'>Create Group</button>
             </div>
