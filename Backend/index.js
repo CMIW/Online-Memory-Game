@@ -49,6 +49,7 @@ io.on('connection', function(socket) {
     io.to(socket.id).emit('roomAccess', payload);
   });
 
+  // !To do: the board should be created when the room is created!
   // validates that the room can bee joined and adds the user to the room
   socket.on('joinRoom', function(payload) {
     let roomId = parseInt(payload.data);
@@ -63,6 +64,7 @@ io.on('connection', function(socket) {
     }
   });
 
+  // !To do: the returned board should be the board for the specific room!
   // sends the playing board when a user request the board
   socket.on('board', function(payload) {
     console.log(payload);
