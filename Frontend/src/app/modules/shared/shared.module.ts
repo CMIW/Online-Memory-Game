@@ -6,10 +6,12 @@ import { CoreModule } from '../../core/core.module';
 import { HomeComponent } from '../../layout/home/home.component';
 import { JoinComponent } from '../../layout/join/join.component';
 import { RoomComponent } from '../../layout/room/room.component';
+import { CardComponent } from '../../layout/components/card/card.component';
 
 import { JoinDialogComponent } from '../../layout/components/join-dialog/join-dialog.component';
 import { CreateDialogComponent } from '../../layout/components/create-dialog/create-dialog.component';
 import { MessageDialogComponent } from '../../layout/components/message-dialog/message-dialog.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -17,7 +19,8 @@ import { MessageDialogComponent } from '../../layout/components/message-dialog/m
     RoomComponent,
     JoinDialogComponent,
     CreateDialogComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    CardComponent
   ],
   entryComponents: [
     JoinDialogComponent,
@@ -35,7 +38,8 @@ import { MessageDialogComponent } from '../../layout/components/message-dialog/m
     RoomComponent,
     JoinDialogComponent,
     CreateDialogComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }
