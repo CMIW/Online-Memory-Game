@@ -6,8 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-dialog.component.css']
 })
 export class CreateDialogComponent implements OnInit {
-  public size: number = 2;
-  public cards: number = 16;
+  public dialogOptions = {size: 2, cards: 12};
   constructor() { }
 
   ngOnInit(): void {

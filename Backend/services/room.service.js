@@ -1,3 +1,5 @@
+const Board = require('../models/board');
+
 class RoomService{
   rooms = new Map();
   ids = [];
@@ -14,9 +16,9 @@ class RoomService{
     return id;
   }
 
-  createRoom(userToken,roomSize){
+  createRoom(userToken,roomSize, deckSize){
     let newId = this.createRoomId();
-    this.rooms[newId] = {integrants:[userToken], size:roomSize};
+    this.rooms[newId] = {integrants:[userToken], size:roomSize, board: new Board(deckSize)};
     return newId;
   }
 
@@ -44,6 +46,10 @@ class RoomService{
       return {access: false, message:"The room is full.", code: 3};
     }
     return {access: true, message:"The room is available.", code: 4};
+  }
+
+  getBoard(roomId){
+    return this.rooms[roomId]["board"];
   }
 
 }
