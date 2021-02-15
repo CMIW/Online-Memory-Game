@@ -51,8 +51,8 @@ export class HomeComponent implements OnInit {
       console.log(result);
 
       if(result){
-        this.size = result;
-        this.socketService.emit("createRoom",this.size);
+        this.size = result.size;
+        this.socketService.emit("createRoom",result);
         this.setUserName();
       }
     });

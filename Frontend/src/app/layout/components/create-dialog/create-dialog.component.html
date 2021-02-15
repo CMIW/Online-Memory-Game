@@ -4,19 +4,19 @@
       <!-- Room size input -->
       <mat-form-field class="col">
         <mat-label>Room Size</mat-label>
-        <input matInput ngModel required [(ngModel)]="size" name="roomSize" id="roomSize" #roomSize="ngModel" type="number" min="2">
+        <input matInput ngModel required [(ngModel)]="dialogOptions.size" name="roomSize" id="roomSize" #roomSize="ngModel" type="number" min="2">
         <small class="text-danger" [class.d-none]="roomSize.valid || roomSize.untouched">A size for the room is required</small>
       </mat-form-field>
       <!-- Number of cards input -->
       <mat-form-field class="col">
         <mat-label>Number of cards</mat-label>
-        <input matInput ngModel required [(ngModel)]="cards" name="numberCards" id="numberCards" #numberCards="ngModel" type="number" min="16" max="24" step="4">
+        <input matInput ngModel required [(ngModel)]="dialogOptions.cards" name="numberCards" id="numberCards" #numberCards="ngModel" type="number" min="12" max="24" step="6">
         <!--<small class="text-danger" [class.d-none]="numberCards.valid || numberCards.untouched">A size for the room is required</small>-->
       </mat-form-field>
     </div>
     <mat-dialog-actions class="row h-100 justify-content-center align-items-center text-center">
       <div class="col">
-        <button mat-raised-button [mat-dialog-close]="size" color type="button" name="createRoom" [disabled]="createForm.form.invalid">Create Room</button>
+        <button mat-raised-button [mat-dialog-close]="dialogOptions" color type="button" name="createRoom" [disabled]="createForm.form.invalid">Create Room</button>
       </div>
     </mat-dialog-actions>
   </form>

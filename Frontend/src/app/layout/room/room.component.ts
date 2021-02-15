@@ -19,13 +19,21 @@ export class RoomComponent implements OnInit {
     this.dataService.getRoomId();
     this.dataService.roomId.subscribe(roomId =>{
       this.roomId = roomId;
-    });
-    this.socketService.emit("board",18);
-    this.dataService.board.subscribe(board =>{
-      if (board) {
-        this.board = board;
+      console.log(roomId);
+      if(roomId && roomId != 'undefined'){
+        this.socketService.emit("board",this.roomId);
+        this.dataService.board.subscribe(board =>{
+          if (board) {
+            this.board = board;
+          }
+        });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dataService.roomId.next(null);
+    this.dataService.roomId.complete();
   }
 
   test(){
