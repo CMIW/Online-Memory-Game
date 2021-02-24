@@ -49,6 +49,8 @@ class RoomService{
   }
 
   getBoard(roomId){
+    console.log(roomId);
+    console.log(this.rooms);
     return this.rooms[roomId]["board"];
   }
 

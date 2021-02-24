@@ -1,3 +1,5 @@
-<div class="col-md-auto m-1 gemCard">
-  <img class="img-fluid align-self-center" src="{{this.card.image}}" alt="">
+<div class="col-md-auto m-1 gemCard" (click)="click()">
+  <div *ngIf="this.card.flipped">
+    <img class="img-fluid align-self-center" src="{{this.card.image}}" alt="A gem of color {{this.card.color}}">
+  </div>
 </div>

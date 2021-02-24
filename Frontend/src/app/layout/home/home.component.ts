@@ -48,8 +48,6 @@ export class HomeComponent implements OnInit {
   createGroup(){
     let dialogRef = this.dialog.open(CreateDialogComponent);
     dialogRef.afterClosed().subscribe(result =>{
-      console.log(result);
-
       if(result){
         this.size = result.size;
         this.socketService.emit("createRoom",result);
