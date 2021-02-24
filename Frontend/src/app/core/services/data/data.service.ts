@@ -6,9 +6,8 @@ import { IBoard } from '../../../models/IBoard.interface';
   providedIn: 'root'
 })
 export class DataService {
-  public roomId = new BehaviorSubject("");
+  public roomId: BehaviorSubject<any> = new BehaviorSubject("");
   public board: BehaviorSubject<IBoard> = new BehaviorSubject(null);
-  //public userName = new BehaviorSubject("");
 
   constructor() { }
 
@@ -41,6 +40,12 @@ export class DataService {
 
   setBoard(board){
     this.board.next(board);
+  }
+
+  clearStorage(){
+    sessionStorage.removeItem('roomId');
+    this.roomId = new BehaviorSubject("");
+    this.board = new BehaviorSubject(null);
   }
 
 }

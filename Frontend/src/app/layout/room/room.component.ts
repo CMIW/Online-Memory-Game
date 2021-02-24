@@ -19,8 +19,8 @@ export class RoomComponent implements OnInit {
     this.dataService.getRoomId();
     this.dataService.roomId.subscribe(roomId =>{
       this.roomId = roomId;
-      console.log(roomId);
-      if(roomId && roomId != 'undefined'){
+      if(roomId){
+        // request the board created for the room
         this.socketService.emit("board",this.roomId);
         this.dataService.board.subscribe(board =>{
           if (board) {

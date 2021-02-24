@@ -14,4 +14,8 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  click():void {
+    this.card.flipped = !this.card.flipped;
+  }
+
 }
